@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include "usar.h"
+#define get_num 10
+int main()
+{
+	int i;
+	int num=0;
+	char dev_buf[] = "/dev/ttyUSB0";
+	char read_buf[1024];
+	USAR usar;
+	usar.init_uart(dev_buf, 19200, 8, 1, 'N');
+	usar.uart_write(dev_buf, strlen(dev_buf));
+
+	while(read_buf[0]!='q')
+	{
+		num=usar.uart_read(read_buf,get_num);
+		printf("len=%d\n",num);
+		printf("data=");
+		/*
+		for(i=0;i<num;i++)
+		{
+			printf("%c",read_buf[i]);	
+		}
+		printf("\n");
+		*/
+	}
+	
+	usar.uart_write(dev_buf, strlen(dev_buf));
+
+	usar.close_uart();
+	return 0;
+}
