@@ -410,7 +410,7 @@ int main(void)
 		get_today_weater(p_bematch);
 		get_tomorrow_weater(p_bematch);
 	
-		usar.uart_write(head, 2);
+		usar.uart_write(head, 2);//每次开始都先发两个字节，0xff,0xff
 		usar.uart_write((char *)&s_weather_v, sizeof(s_weather_v));
 	
 		show_num();	
